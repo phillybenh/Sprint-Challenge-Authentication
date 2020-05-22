@@ -1,6 +1,3 @@
-const jwt = require("jsonwebtoken");
-const configVars = require("../config/vars.js");
-
 module.exports = {
     isValid,
     createToken
