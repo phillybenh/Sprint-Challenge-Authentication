@@ -1,3 +1,6 @@
+const jwt = require("jsonwebtoken");
+const configVars = require("../config/vars.js");
+
 module.exports = {
     isValid,
     createToken
@@ -12,7 +15,6 @@ function createToken(user) {
         sub: user.id,
         username: user.username,
         role: user.role,
-        department: user.department
     };
 
     const secret = configVars.jwtSecret;

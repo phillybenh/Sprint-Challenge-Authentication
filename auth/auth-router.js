@@ -6,16 +6,16 @@ const Users = require("./auth-model");
 const { isValid, createToken } = require("./auth-services");
 const configVars = require("../config/vars.js");
 
-router.get("/", (req, res) => {
-  // res.status(200).json({ api: "up" });
-  Users.find()
-   .then(user => {
-     res.status(201).json({ data: user });
-   })
-    .catch(error => {
-      res.status(500).json({ message: error.message });
-    });
-});
+// router.get("/", (req, res) => {
+//   // res.status(200).json({ api: "up" });
+//   Users.find()
+//    .then(user => {
+//      res.status(201).json({ data: user });
+//    })
+//     .catch(error => {
+//       res.status(500).json({ message: error.message });
+//     });
+// });
 
 router.post('/register', (req, res) => {
   const credentials = req.body;
