@@ -13,6 +13,15 @@ describe('auth', () => {
 })
 
 describe('POST to api/auth/register', () => {
+    it('cannot register an incomplete user', async () => {
+        const res = await request(server)
+            .post('/api/auth/register')
+            .send({
+                username: "testUser99",
+            });
+        expect(res.status).toBe(400);
+        expect(res.body).toMatchObject({ message: 'Please provide a username and password.' });
+    })
     it('can register a user', async () => {
         const res = await request(server)
             .post('/api/auth/register')
@@ -39,6 +48,22 @@ describe('POST to api/auth/register', () => {
 })
 
 describe('POST to api/auth/login', () => {
+    it('cannot log an invalid user in', async () => {
+        const register = await request(server)
+            .post('/api/auth/register')
+            .send({
+                username: "testUser2",
+                password: "pwd123"
+            });
+        const login = await request(server)
+            .post("/api/auth/login")
+            .send({
+                username: "testUser2",
+                password: "321dwp"
+            });
+        expect(login.status).toBe(401);
+        expect(login.body).toMatchObject({ message: 'Invalid credentials.' })
+    })
     it('can log a user in', async () => {
         const register = await request(server)
             .post('/api/auth/register')
